@@ -57,6 +57,9 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
+// CORS proxy URL (AllOrigins)
+const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+
 function showError(message) {
   errorMsg.textContent = message;
   errorMsg.classList.remove('hidden');
@@ -126,12 +129,13 @@ async function getHotpepperSpots(lat, lon, distanceKm) {
   else if (distanceKm <= 2.0) range = 4;
   else range = 5;
 
-  // Viteのプロキシ機能を使ってCORSを回避
-  const url = `/hotpepper-api/hotpepper/gourmet/v1/?key=${HOTPEPPER_API_KEY}&lat=${lat}&lng=${lon}&range=${range}&lunch=1&count=12&format=json`;
+  // GitHub Pagesなどの静的環境で動かすため、外部プロキシを使用
+  const url = `https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=${HOTPEPPER_API_KEY}&lat=${lat}&lng=${lon}&range=${range}&lunch=1&count=12&format=json`;
+  const proxiedUrl = CORS_PROXY + encodeURIComponent(url);
   
   try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error('Hotpepper API Error');
+    const res = await fetch(proxiedUrl);
+    if (!res.ok) throw new Error('CORS Proxy Error');
     const data = await res.json();
     
     if (data.results.error) {
