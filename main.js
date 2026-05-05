@@ -57,8 +57,8 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
-// CORS proxy URL (AllOrigins)
-const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+// CORS proxy URL (corsproxy.io)
+const CORS_PROXY = 'https://corsproxy.io/?';
 
 function showError(message) {
   errorMsg.textContent = message;
