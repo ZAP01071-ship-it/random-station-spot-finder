@@ -131,7 +131,7 @@ async function getHotpepperSpots(lat, lon, distanceKm) {
 
   // GitHub Pagesなどの静的環境で動かすため、外部プロキシを使用
   // より確実に表示させるため、一時的にランチ限定解除して広めに検索
-  const url = `https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=${HOTPEPPER_API_KEY}&lat=${lat}&lng=${lon}&range=${range}&count=12&format=json`;
+  const url = `https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=${HOTPEPPER_API_KEY}&lat=${lat}&lng=${lon}&range=${range}&count=20&format=json`;
   const proxiedUrl = CORS_PROXY + encodeURIComponent(url);
   
   try {
